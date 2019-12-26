@@ -5,13 +5,13 @@
 # Usage: 
 # # 1a) Update the Created and Modified DateTimes when there is a DateTaken provided (DateTimeOriginal) - in current folder
 # python MediaFilePrefixer.py setTimeStamps
-# # 1) Update the Created and Modified DateTimes for images stored in a different folder (script converts proper directory indication)
+# # 1b) Update the Created and Modified DateTimes for images stored in a different folder (script converts proper directory indication)
 # python MediaFilePrefixer.py setTimeStamps 'D:/Pictures/Event'
 #
 # # Update file names based on the created date
 # # 2a) Add prefix to file names (including movies) based on Created Date - in current folder
 # python MediaFilePrefixer.py prefixFiles
-# # 2a) Add prefix to file names (including movies) based on Created Date - in specified folder
+# # 2b) Add prefix to file names (including movies) based on Created Date - in specified folder
 # python MediaFilePrefixer.py prefixFiles 'D:/Pictures/Event'
 #
 # @Author 	Reinier van den Assum
