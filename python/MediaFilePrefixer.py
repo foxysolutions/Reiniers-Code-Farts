@@ -4,9 +4,9 @@
 #
 # Usage: 
 # # 1a) Update the Created and Modified DateTimes when there is a DateTaken provided (DateTimeOriginal) - in current folder
-# python MediaFilePrefixer.py setTimeStamps
+# python MediaFilePrefixer.py setTimestamps
 # # 1b) Update the Created and Modified DateTimes for images stored in a different folder (script converts proper directory indication)
-# python MediaFilePrefixer.py setTimeStamps 'D:/Pictures/Event'
+# python MediaFilePrefixer.py setTimestamps 'D:/Pictures/Event'
 #
 # # Update file names based on the created date
 # # 2a) Add prefix to file names (including movies) based on Created Date - in current folder
@@ -24,6 +24,7 @@ from exif import Image
 from datetime import datetime, timedelta
 
 __dir__ = '.'
+__dateFormat__ = '%Y-%m-%d %H:%M:%S'
 
 #####
 # UTIL METHODS
@@ -68,7 +69,7 @@ def getExifCreationDate( path ):
 			my_image = Image( image_file )
 		originalTime = my_image.datetime_original
 		if( originalTime ):
-			timeStamp = datetime.strptime( originalTime, '%Y:%m:%d %H:%M:%S' )
+			timeStamp = datetime.strptime( originalTime, __dateFormat__ )
 	except Exception as e :
 		print( 'Failed to retrieve datetime_original via Exif for '+ path.replace( __dir__, '' ) )
 		print( '>> '+ str( e ) )
@@ -79,9 +80,8 @@ def getExifCreationDate( path ):
 		response = os.popen( 'exif' + ' -x "%s"' % path, 'r' )
 		lines = response.read()
 		matches = re.findall('<Date_and_Time.+?>(.*?)</Date_and_Time.+?>', lines)
-		if( len( matches ) ):
-			timeStamp = min(*[datetime.strptime(x, '%Y:%m:%d %H:%M:%S') for x in matches])
-	
+		if( len( matches ) ) :
+			timeStamp = min( * [datetime.strptime( x, __dateFormat__ ) for x in matches ] )
 	return timeStamp
 
 def getFileDates(path):
@@ -97,7 +97,7 @@ def getFileDates(path):
   
 def setFileDates( path, dates ):
 	"""Sets file modification and creation dates to the specified value"""
-	newTime = time.mktime(dates['exif'].timetuple())
+	newTime = time.mktime( dates['exif'].timetuple() )
 	# update modified and accessed time
 	os.utime( path, ( newTime, newTime ) )
 	try:
@@ -120,7 +120,7 @@ def rename():
 	# Sort Images by Created Date and Rename files
 	renameFiles( sorted( imageList, key=lambda p: os.stat( __dir__ + '/' + p ).st_ctime ) )
 	
-def setTimeStamps():
+def setTimestamps():
 	print( '== Start running setTimestamps ==' )
 	print( '== Folder '+ __dir__ )
 	# Get Images (files and correct extension)
@@ -135,7 +135,7 @@ def setTimeStamps():
 			cmp_time = lambda x, y: abs( x - y ) > timedelta(minutes=10)
 			diff = [ cmp_time( dates[x], dates['exif'] ) for x in ('mtime', 'ctime') ]
 			if( sum( diff ) ):
-				result += dates['exif'].strftime("%Y-%m-%d %H:%M:S" ) + ' vs. '+ dates['mtime'].strftime("%Y-%m-%d %H:%M:S" ) + ' vs. '+ dates['mtime'].strftime("%Y-%m-%d %H:%M:S" )
+				result += dates['exif'].strftime( __dateFormat__ ) + ' vs. '+ dates['mtime'].strftime( __dateFormat__ ) + ' vs. '+ dates['mtime'].strftime( __dateFormat__ )
 				result += ' '+ setFileDates( fullPath, dates )
 			else:
 				result = 'Less than 10 minutes difference between dates'
@@ -153,8 +153,8 @@ try:
 
 	if methodName == 'prefixFiles' :
 		rename();
-	elif methodName == 'setTimeStamps':
-		setTimeStamps();
+	elif methodName == 'setTimestamps':
+		setTimestamps();
 	else:
 		print('No method selected')
 except Exception as e:
