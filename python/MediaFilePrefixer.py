@@ -4,9 +4,9 @@
 #
 # Usage: 
 # # 1a) Update the Created and Modified DateTimes when there is a DateTaken provided (DateTimeOriginal) - in current folder
-# python MediaFilePrefixer.py setTimeStamps
+# python MediaFilePrefixer.py setTimestamps
 # # 1b) Update the Created and Modified DateTimes for images stored in a different folder (script converts proper directory indication)
-# python MediaFilePrefixer.py setTimeStamps 'D:/Pictures/Event'
+# python MediaFilePrefixer.py setTimestamps 'D:/Pictures/Event'
 #
 # # Update file names based on the created date
 # # 2a) Add prefix to file names (including movies) based on Created Date - in current folder
@@ -120,7 +120,7 @@ def rename():
 	# Sort Images by Created Date and Rename files
 	renameFiles( sorted( imageList, key=lambda p: os.stat( __dir__ + '/' + p ).st_ctime ) )
 	
-def setTimeStamps():
+def setTimestamps():
 	print( '== Start running setTimestamps ==' )
 	print( '== Folder '+ __dir__ )
 	# Get Images (files and correct extension)
@@ -153,8 +153,8 @@ try:
 
 	if methodName == 'prefixFiles' :
 		rename();
-	elif methodName == 'setTimeStamps':
-		setTimeStamps();
+	elif methodName == 'setTimestamps':
+		setTimestamps();
 	else:
 		print('No method selected')
 except Exception as e:
