@@ -23,16 +23,27 @@ Public Class EmailVitalityRibbon
         Else
             ' When valid new input, update Application Setting
             My.Settings.WorkHoursStart = WorkHoursStart.Text
+            PersistSettingChange()
         End If
     End Sub
 
-    Private Sub WorkingHoursEnd_TextChanged(sender As Object, e As RibbonControlEventArgs) Handles WorkHoursEnd.TextChanged
+    Private Sub WorkHoursEnd_TextChanged(sender As Object, e As RibbonControlEventArgs) Handles WorkHoursEnd.TextChanged
         If Not ValidateTime(WorkHoursEnd.Text) Then
-            MsgBox("Invalid input provided " & WorkHoursStart.Text & ". Reset to: 17:00:00.")
+            MsgBox("Invalid input provided " & WorkHoursEnd.Text & ". Reset to: 17:00:00.")
             WorkHoursEnd.Text = "17:00:00"
         Else
             ' When valid new input, update Application Setting
             My.Settings.WorkHoursEnd = WorkHoursEnd.Text
+            PersistSettingChange()
         End If
+    End Sub
+
+    Private Sub ShowPrompt_Click(sender As Object, e As RibbonControlEventArgs) Handles ShowPrompt.Click
+        My.Settings.ShowPrompt = ShowPrompt.Checked
+        PersistSettingChange()
+    End Sub
+
+    Private Sub PersistSettingChange()
+        My.Settings.Save() 'Save updated settings to ensure consistency after re-opening Application
     End Sub
 End Class

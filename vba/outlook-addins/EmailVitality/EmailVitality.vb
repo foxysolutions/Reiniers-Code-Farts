@@ -15,9 +15,9 @@ Public Class EmailVitality
             objMail = Item
 
             ' Fetch user input from Ribbon (Start and End times of WorkingDay & to always postpone delivery)
-            Dim WorkingDayStart As String = Globals.Ribbons.EmailVitalityRibbon.WorkHoursStart.Text
-            Dim WorkingDayEnd As String = Globals.Ribbons.EmailVitalityRibbon.WorkHoursEnd.Text
-            Dim bShowPrompt As Boolean = Globals.Ribbons.EmailVitalityRibbon.ShowPrompt.Checked
+            Dim WorkingDayStart As String = My.Settings.WorkHoursStart
+            Dim WorkingDayEnd As String = My.Settings.WorkHoursEnd
+            Dim bShowPrompt As Boolean = My.Settings.ShowPrompt
 
             Dim today As Date = Date.Now().Date
             Dim bDelayMail As Boolean = True
