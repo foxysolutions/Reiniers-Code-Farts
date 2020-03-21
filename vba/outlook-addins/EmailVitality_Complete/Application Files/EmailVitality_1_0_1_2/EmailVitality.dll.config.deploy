@@ -28,7 +28,7 @@
         </sharedListeners>
     </system.diagnostics>
     <userSettings>
-        <Email_Vitality.MySettings>
+        <EmailVitality.MySettings>
             <setting name="WorkHoursStart" serializeAs="String">
                 <value>08:30:00</value>
             </setting>
@@ -38,6 +38,6 @@
             <setting name="ShowPrompt" serializeAs="String">
                 <value>True</value>
             </setting>
-        </Email_Vitality.MySettings>
+        </EmailVitality.MySettings>
     </userSettings>
 </configuration>

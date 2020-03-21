@@ -62,7 +62,7 @@
         Me.WorkHoursGroup.Items.Add(Me.WorkHoursStart)
         Me.WorkHoursGroup.Items.Add(Me.WorkHoursEnd)
         Me.WorkHoursGroup.Items.Add(Me.ShowPrompt)
-        Me.WorkHoursGroup.Label = "Email Vitality Workhours"
+        Me.WorkHoursGroup.Label = "Email Vitality Working hours"
         Me.WorkHoursGroup.Name = "WorkHoursGroup"
         '
         'WorkHoursStart
@@ -86,9 +86,9 @@
         Me.ShowPrompt.Checked = Global.EmailVitality.MySettings.Default.ShowPrompt
         Me.ShowPrompt.Label = "ShowPrompt"
         Me.ShowPrompt.Name = "ShowPrompt"
-        Me.ShowPrompt.ScreenTip = "Always ask whether or not to delay an email send outside Workinghours."
+        Me.ShowPrompt.ScreenTip = "Always ask whether or not to delay an email send outside working hours."
         Me.ShowPrompt.SuperTip = "When deselected each email which is send after Workinghours will automatically be" &
-    " scheduled for the start of the next Workday."
+    " scheduled for the start of the next workday."
         '
         'EmailVitalityRibbon
         '
