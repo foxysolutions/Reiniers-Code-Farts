@@ -23,6 +23,7 @@ Public Class EmailVitalityRibbon
         Else
             ' When valid new input, update Application Setting
             My.Settings.WorkHoursStart = WorkHoursStart.Text
+            PersistSettingChange()
         End If
     End Sub
 
@@ -33,10 +34,16 @@ Public Class EmailVitalityRibbon
         Else
             ' When valid new input, update Application Setting
             My.Settings.WorkHoursEnd = WorkHoursEnd.Text
+            PersistSettingChange()
         End If
     End Sub
 
     Private Sub ShowPrompt_Click(sender As Object, e As RibbonControlEventArgs) Handles ShowPrompt.Click
         My.Settings.ShowPrompt = ShowPrompt.Checked
+        PersistSettingChange()
+    End Sub
+
+    Private Sub PersistSettingChange()
+        My.Settings.Save() 'Save updated settings to ensure consistency after re-opening Application
     End Sub
 End Class
