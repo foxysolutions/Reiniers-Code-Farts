@@ -2,12 +2,6 @@
 
 Public Class EmailVitality
 
-    Private Sub EmailVitality_Startup() Handles Me.Startup
-    End Sub
-
-    Private Sub EmailVitality_Shutdown() Handles Me.Shutdown
-    End Sub
-
     Private Sub Application_ItemSend(Item As Object, ByRef Cancel As Boolean) Handles Application.ItemSend
         Dim objMail As MailItem
 
